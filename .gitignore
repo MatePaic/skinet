@@ -1,0 +1,5 @@
+obj
+bin
+sql.txt
+appsettings.json
+*.db
