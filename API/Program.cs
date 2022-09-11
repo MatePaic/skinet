@@ -1,3 +1,4 @@
+using API.Helpers;
 using Core.Interfaces;
 using Infrastructure;
 using Infrastructure.Data;
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<StoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Skinet"));
 });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 var app = builder.Build();
 
@@ -28,7 +31,6 @@ var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 try
 
 {
-
     var context = services.GetRequiredService<StoreContext>();
 
     await context.Database.MigrateAsync();
@@ -42,20 +44,13 @@ try
     //await identityContext.Database.MigrateAsync();
 
     //await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
-
 }
-
 catch (Exception ex)
-
 {
-
     var logger = loggerFactory.CreateLogger<Program>();
 
     logger.LogError(ex, "An error occurred during migration");
-
 }
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -65,6 +60,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
