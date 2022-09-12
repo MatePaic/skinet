@@ -18,6 +18,11 @@ namespace Infrastructure.Data
             this._storeContext = storeContext;
         }
 
+        private IQueryable<T> ApplySpecification(ISpecification<T> specification)
+        {
+            return SpecificationEvaluator<T>.GetQuery(_storeContext.Set<T>().AsQueryable(), specification);
+        }
+
         public async Task<T> GetByIdAsync(int id)
         {
             return await _storeContext.Set<T>().FindAsync(id);
@@ -38,9 +43,9 @@ namespace Infrastructure.Data
             return await ApplySpecification(specification).ToListAsync();
         }
 
-        private IQueryable<T> ApplySpecification(ISpecification<T> specification)
+        public async Task<int> CountAsync(ISpecification<T> specification)
         {
-            return SpecificationEvaluator<T>.GetQuery(_storeContext.Set<T>().AsQueryable(), specification);
+            return await ApplySpecification(specification).CountAsync();
         }
     }
 }
