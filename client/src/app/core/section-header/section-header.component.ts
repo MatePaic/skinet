@@ -16,6 +16,5 @@ export class SectionHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadcrumb$ = this.bcService.breadcrumbs$;
-    console.log(this.breadcrumb$);
   }
 }
