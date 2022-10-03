@@ -1,4 +1,4 @@
-﻿using Core.Entities.Entites;
+﻿using Core.Entities.Identity;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;

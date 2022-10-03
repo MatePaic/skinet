@@ -1,7 +1,7 @@
 using API.Extensions;
 using API.Helpers;
 using API.Middleware;
-using Core.Entities.Entites;
+using Core.Entities.Identity;
 using Infrastructure;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
