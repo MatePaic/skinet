@@ -17,7 +17,12 @@
             </app-stepper>
         </div>
         <div class="col-4">
-            <app-order-totals></app-order-totals>
+            <app-order-totals
+                *ngIf="(basketTotal$ | async)"
+                [shippingPrice]="(basketTotal$ | async).shipping"
+                [subtotal]="(basketTotal$ | async).subtotal"
+                [total]="(basketTotal$ | async).total">
+            </app-order-totals>
         </div>
     </div>
 </div>

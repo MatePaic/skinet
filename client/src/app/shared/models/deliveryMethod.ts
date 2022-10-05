@@ -5,4 +5,3 @@ export interface IDeliveryMethod {
     description: string;
     price: number;
 }
-
